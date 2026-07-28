@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#211f22">
+  <title>第五手记地图</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="select-mode">
+  <header class="app-bar">
+    <div>
+      <h1>第五手记地图</h1>
+      <p id="statusText" aria-live="polite">等待选择截图</p>
+    </div>
+    <span class="offline-mark">离线</span>
+  </header>
+
+  <main>
+    <section id="uploadView" class="upload-view">
+      <img class="upload-background" src="./upload-background.webp" alt="" aria-hidden="true">
+      <label class="upload-zone" for="imageInput" aria-label="选择图片">
+        <span class="upload-focus">
+          <span class="upload-plus" aria-hidden="true">+</span>
+          <strong>选择图片</strong>
+        </span>
+      </label>
+      <input id="imageInput" type="file" accept="image/*" hidden>
+    </section>
+
+    <section id="resultView" class="result-view" hidden>
+      <div class="result-bar">
+        <div>
+          <span class="result-label">匹配结果</span>
+          <strong id="mapName">地图</strong>
+        </div>
+        <button id="replaceButton" class="text-button" type="button">重新选择</button>
+      </div>
+
+      <div id="mapViewport" class="map-viewport">
+        <img id="mapImage" alt="匹配到的游戏地图" draggable="false">
+        <div id="loadingState" class="loading-state" hidden>
+          <span class="spinner"></span>
+          <span>正在匹配</span>
+        </div>
+      </div>
+
+      <div class="zoom-bar" aria-label="地图缩放工具">
+        <button id="zoomOut" type="button" title="缩小" aria-label="缩小">-</button>
+        <output id="zoomValue">100%</output>
+        <button id="zoomIn" type="button" title="放大" aria-label="放大">+</button>
+        <button id="zoomReset" class="reset-button" type="button">复位</button>
+        <button id="noticeButton" class="notice-button" type="button" aria-label="查看图库说明">注</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="noticeDialog" class="notice-dialog" aria-labelledby="noticeTitle">
+    <div class="notice-heading">
+      <strong id="noticeTitle">图库说明</strong>
+      <button id="noticeClose" class="dialog-close" type="button" aria-label="关闭">×</button>
+    </div>
+    <p>本软件日期为 2026.7.25，后续新图未纳入图库。感谢地图作者提供的游戏地图。</p>
+  </dialog>
+
+  <div id="errorToast" class="toast" role="alert" hidden></div>
+  <script src="./matcher/manifest.js"></script>
+  <script src="./matcher.js?v=1"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
